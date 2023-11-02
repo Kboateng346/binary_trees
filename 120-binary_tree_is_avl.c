@@ -1,7 +1,7 @@
 #include "binary_trees.h"
 #include "limits.h"
 
-size_t binheight(const binary_tree_t *tree);
+size_t height(const binary_tree_t *tree);
 int is_avl_helper(const binary_tree_t *tree, int low, int high);
 int binary_tree_is_avl(const binary_tree_t *tree);
 
@@ -11,14 +11,14 @@ int binary_tree_is_avl(const binary_tree_t *tree);
  *
  * Return: If tree is NULL, your function must return 0, else return height.
  */
-size_t binheight(const binary_tree_t *tree)
+size_t height(const binary_tree_t *tree)
 {
 	if (tree)
 	{
 		size_t height_l = 0, height_r = 0;
 
-		height_l= tree->left ? 1 + binheight(tree->left) : 1;
-		height_r= tree->right ? 1 + binheight(tree->right) : 1;
+		height_l= tree->left ? 1 + height(tree->left) : 1;
+		height_r= tree->right ? 1 + height(tree->right) : 1;
 		return ((height_l > height_r) ? height_l : height_r);
 	}
 	return (0);
@@ -27,8 +27,8 @@ size_t binheight(const binary_tree_t *tree)
 /**
  * is_avl_helper - Checks if a binary tree is a valid AVL tree.
  * @tree: A pointer to the root node of the tree to check.
- * @lo: The value of the smallest node visited thus far.
- * @hi: The value of the largest node visited this far.
+ * @: The value of the smallest node visited thus far.
+ * @high: The value of the largest node visited this far.
  *
  * Return: If the tree is a valid AVL tree, 1, otherwise, 0.
  */
@@ -40,8 +40,8 @@ int is_avl_helper(const binary_tree_t *tree, int low, int high)
 	{
 		if (tree->n < low || tree->n > high)
 			return (0);
-		height_lhgt = binheight(tree->left);
-		height_rhgt = binheight(tree->right);
+		height_lhgt = height(tree->left);
+		height_rhgt = height(tree->right);
 		diff = height_lhgt > height_rhgt ? height_lhgt - height_rhgt : height_rhgt - height_lhgt;
 		if (diff > 1)
 			return (0);
