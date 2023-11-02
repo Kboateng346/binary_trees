@@ -39,7 +39,7 @@ bst_t *bst_delete(bst_t *root, bst_t *node)
 		if (node->right != NULL)
 			node->right->parent = parent;
 		free(node);
-		return (parent == NULL ? node->right : root);
+		return (!parent ? node->right : root);
 	}
 
 	/* Left-child only */
@@ -52,7 +52,7 @@ bst_t *bst_delete(bst_t *root, bst_t *node)
 		if (node->left != NULL)
 			node->left->parent = parent;
 		free(node);
-		return (parent == NULL ? node->left : root);
+		return (!parent ? node->left : root);
 	}
 
 	/* Two children */
